@@ -5,4 +5,4 @@ matplotlib
 skops
 black
 flake8
-dvc
+dvc[http]==3.50.1

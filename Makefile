@@ -1,7 +1,6 @@
 install:
 	pip install --upgrade pip &&\
-		pip install -r requirements.txt &&\
-		pip install dvc
+		pip install -r requirements.txt
 
 format-check:
 	black --check .
