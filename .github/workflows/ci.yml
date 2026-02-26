@@ -1,0 +1,61 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Revisando Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Configurar CML
+        uses: iterative/setup-cml@v2
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Configure DVC
+        run: |
+            dvc remote modify diabetes_storage user alecorlo1234 --local
+            dvc remote modify diabetes_storage password ${{ secrets.DVC_PASSWORD }} --local
+
+      - name: Pull DVC
+        run: make pull_dvc
+      
+      - name: Revisar el formato
+        run: make format-check
+
+      - name: Analizar código
+        run: make lint
+
+      - name: Entrenar modelo
+        run: make train
+
+      - name: Evaluacion
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make eval
