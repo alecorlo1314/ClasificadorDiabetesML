@@ -5,6 +5,9 @@ install:
 format-check:
 	black --check .
 
+pull_dvc:
+	dvc pull -r diabetes_storage
+
 train:
 	python entrenamiento.py
 
@@ -36,6 +39,5 @@ hf-login:
 push-hub:
 	hf upload alecorlo1234/ClasificadorDiabetesML ./Aplicacion/diabetes_prediction_dataset.py /diabetes_prediction_dataset.py --repo-type space --commit-message="Sincronizando diabetes_prediction_dataset.py"
 	hf upload alecorlo1234/ClasificadorDiabetesML ./Modelo /Modelo --repo-type space --commit-message="Sincronizando Modelo"
-	hf upload alecorlo1234/ClasificadorDiabetesML ./Resultados /Metricas --repo-type=space --commit-message="Sincronizando Metricas"
 
 deploy: hf-login push-hub
