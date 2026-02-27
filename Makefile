@@ -6,7 +6,7 @@ format:
 	black .
 
 configuracion_DVC_remoto:
-	dvc remote add diabetes_storage https://dagshub.com/alecorlo1234/ClasificadorDiabetesML.dvc
+	dvc remote add -f diabetes_storage https://dagshub.com/alecorlo1234/ClasificadorDiabetesML.dvc
 	dvc remote default diabetes_storage
 	dvc remote modify diabetes_storage auth basic
 	dvc remote modify diabetes_storage user alecorlo1234
