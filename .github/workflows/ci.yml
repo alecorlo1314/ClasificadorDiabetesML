@@ -47,6 +47,11 @@ jobs:
       - name: Configure DVC
         run: make configuracion_DVC_remoto
 
+      - name: Debug DVC
+        run: |
+          dvc remote list
+          dvc status -c
+          
       - name: Traer datos DVC
         run: make pull_dvc
 
