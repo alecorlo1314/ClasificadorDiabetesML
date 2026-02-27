@@ -3,8 +3,6 @@ from sklearn.metrics import (
     f1_score,
     recall_score,
     precision_score,
-    confusion_matrix,
-    classification_report,
 )
 
 
