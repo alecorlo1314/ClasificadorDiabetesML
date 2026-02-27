@@ -46,6 +46,13 @@ jobs:
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: make configuracion_DVC_remoto
 
+      - name: Traer datos DVC
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          dvc remote modify diabetes_storage password $DAGSHUB_TOKEN
+          dvc pull -r diabetes_storage
+
       - name: Debug DVC auth
         run: |
           cat .dvc/config
