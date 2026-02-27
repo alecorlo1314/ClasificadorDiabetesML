@@ -34,6 +34,10 @@ jobs:
 
       - name: Configurar CML para el Reporte Final
         uses: iterative/setup-cml@v2
+
+      - name: Clean pip environment
+        run: |
+          pip uninstall -y dvc pathspec || true
     
       - name: Install dependencies
         run: make install
