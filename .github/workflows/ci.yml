@@ -32,22 +32,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Configurar CML
+      - name: Configurar CML para el Reporte Final
         uses: iterative/setup-cml@v2
 
       - name: Install dependencies
         run: make install
 
-      - name: Configure DVC
-        run: |
-            dvc remote modify diabetes_storage user alecorlo1234 --local
-            dvc remote modify diabetes_storage password ${{ secrets.DVC_PASSWORD }} --local
-
-      - name: Pull DVC
-        run: make pull_dvc
-      
       - name: Revisar el formato
         run: make format-check
+        
+      - name: Configure DVC
+        run: make configuracion_DVC_remoto
+
+      - name: Traer datos DVC
+        run: make pull_dvc
 
       - name: Analizar código
         run: make lint
