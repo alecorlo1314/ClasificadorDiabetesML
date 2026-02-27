@@ -48,8 +48,7 @@ jobs:
 
       - name: Debug DVC auth
         run: |
-          dvc remote list
-          dvc remote modify diabetes_storage --list
+          cat .dvc/config
 
       - name: Debug DVC
         run: |
