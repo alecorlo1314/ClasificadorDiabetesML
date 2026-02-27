@@ -35,6 +35,9 @@ jobs:
       - name: Configurar CML para el Reporte Final
         uses: iterative/setup-cml@v2
 
+      - name: Configurando dvc
+        uses: iterative/setup-dvc@v1
+    
       - name: Install dependencies
         run: make install
 
