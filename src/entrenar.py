@@ -10,22 +10,27 @@ def construir_pipeline():
     preprocesamiento = ColumnTransformer(
         transformers=[
             ("num", StandardScaler(), [1, 5, 6]),
-            ("cat", OneHotEncoder(handle_unknown="ignore"), [0, 4])
+            ("cat", OneHotEncoder(handle_unknown="ignore"), [0, 4]),
         ],
-        remainder="passthrough"
+        remainder="passthrough",
     )
 
     pipe = Pipeline(
         steps=[
             ("preprocessing", preprocesamiento),
             ("smote", SMOTE(random_state=42)),
-            ("modelo", MLPClassifier(max_iter=1000, 
-                                     early_stopping=True,
-                                     random_state=42, 
-                                     activation="logistic", 
-                                     hidden_layer_sizes=(100,),
-                                     learning_rate = "constant",
-                                     learning_rate_init=0.001))
+            (
+                "modelo",
+                MLPClassifier(
+                    max_iter=1000,
+                    early_stopping=True,
+                    random_state=42,
+                    activation="logistic",
+                    hidden_layer_sizes=(100,),
+                    learning_rate="constant",
+                    learning_rate_init=0.001,
+                ),
+            ),
         ]
     )
 

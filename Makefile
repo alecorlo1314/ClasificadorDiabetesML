@@ -2,8 +2,13 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
-format-check:
-	black --check .
+format:
+	black .
+
+configuracion_DVC_remoto:
+	dvc remote modify diabetes_storage auth basic
+	dvc remote modify diabetes_storage user alecorlo1234
+	dvc remote modify diabetes_storage password ${{ secrets.DAGSHUB_TOKEN }}
 
 pull_dvc:
 	dvc pull -r diabetes_storage
@@ -16,10 +21,16 @@ lint:
 
 eval:
 	test -f ./Resultados/metricas.txt
+
 	echo "## Metricas del Modelo" > reporte.md
 	cat ./Resultados/metricas.txt >> reporte.md
+
 	echo '\n## Matriz de Confusion' >> reporte.md
 	echo '![Matriz de Confusion](./Resultados/matriz_confusion.png)' >> reporte.md
+
+	echo '\n## Curva ROC' >> reporte.md
+	echo '![Curva ROC](./Resultados/roc_curve.png)' >> reporte.md
+
 	cml comment create reporte.md
 
 update-branch:

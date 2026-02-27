@@ -7,7 +7,17 @@ print("Tipos no confiables:", unsafe)
 
 pipeline = load("Modelo/pipeline.skops", trusted=unsafe)
 
-def prediccion(gender, age, hypertension, heart_disease, smoking_history,bmi, HbA1c_level, blood_glucose_level):
+
+def prediccion(
+    gender,
+    age,
+    hypertension,
+    heart_disease,
+    smoking_history,
+    bmi,
+    HbA1c_level,
+    blood_glucose_level,
+):
     """
     Args:
         gender (str): Género de la persona (ej. 'Male', 'Female').
@@ -23,22 +33,34 @@ def prediccion(gender, age, hypertension, heart_disease, smoking_history,bmi, Hb
         int: 1 si el modelo predice que la persona es diabética, 0 si no lo es.
     """
 
-
-    caracteristicas = [gender, age, hypertension, heart_disease, smoking_history,bmi, HbA1c_level, blood_glucose_level]
+    caracteristicas = [
+        gender,
+        age,
+        hypertension,
+        heart_disease,
+        smoking_history,
+        bmi,
+        HbA1c_level,
+        blood_glucose_level,
+    ]
     diabetes_predicha = pipeline.predict([caracteristicas])[0]
-    
+
     label = f"La persona es {'diabética' if diabetes_predicha == 1 else 'no diabética'}"
     return label
+
 
 entradas = [
     gr.Dropdown(choices=["Male", "Female", "Other"], label="Genero"),
     gr.Number(label="Edad"),
-    gr.Radio(choices=[0, 1], label="Hipertension"),   # 1 = Sí, 0 = No
+    gr.Radio(choices=[0, 1], label="Hipertension"),  # 1 = Sí, 0 = No
     gr.Radio(choices=[0, 1], label="Enfermedad Cardíaca"),  # 1 = Sí, 0 = No
-    gr.Dropdown(choices=["never", "former", "current","not current","ever", "No Info"], label="Historial de Tabaco"),  # never = Nunca, former = Exfumador, current = Fumador actual
+    gr.Dropdown(
+        choices=["never", "former", "current", "not current", "ever", "No Info"],
+        label="Historial de Tabaco",
+    ),  # never = Nunca, former = Exfumador, current = Fumador actual
     gr.Number(label="IMC"),
     gr.Number(label="HbA1c Level"),
-    gr.Number(label="Blood Glucose Level")
+    gr.Number(label="Blood Glucose Level"),
 ]
 salida = [gr.Label(num_top_classes=8, label="Predicción de Diabetes")]
 
@@ -47,7 +69,7 @@ salida = [gr.Label(num_top_classes=8, label="Predicción de Diabetes")]
 ejemplos = [
     ["Male", 45, 1, 0, "former", 28.5, 6.2, 150],
     ["Female", 30, 0, 0, "never", 22.1, 5.4, 95],
-    ["Male", 60, 1, 1, "current", 31.0, 7.8, 200]
+    ["Male", 60, 1, 1, "current", 31.0, 7.8, 200],
 ]
 
 # Título y descripción
@@ -57,8 +79,8 @@ articulo = "Proyecto de Machine Learning con DVC, GitHub y DagsHub."
 
 # Interfaz
 demo = gr.Interface(
-    fn=prediccion,   # tu función de predicción
-    inputs= entradas,
+    fn=prediccion,  # tu función de predicción
+    inputs=entradas,
     outputs=salida,
     examples=ejemplos,
     title=titulo,
