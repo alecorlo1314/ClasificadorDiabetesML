@@ -10,10 +10,6 @@ configuracion_DVC_remoto:
 	dvc remote default diabetes_storage
 	dvc remote modify diabetes_storage auth basic
 	dvc remote modify diabetes_storage user alecorlo1234
-	dvc remote modify diabetes_storage password ${{ secrets.DAGSHUB_TOKEN }}
-
-pull_dvc:
-	dvc pull -r diabetes_storage
 
 train:
 	python entrenamiento.py
