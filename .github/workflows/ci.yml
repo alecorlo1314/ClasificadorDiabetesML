@@ -1,29 +1,23 @@
 name: Continuous Integration
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
-
 permissions:
   contents: write
   pull-requests: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Revisando Repositorio
         uses: actions/checkout@v4
-
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Cache pip
         uses: actions/cache@v4
         with:
@@ -31,46 +25,26 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-
       - name: Configurar CML para el Reporte Final
         uses: iterative/setup-cml@v2
-    
       - name: Install dependencies
         run: make install
-
       - name: Revisar el formato
         run: make format
-
       - name: Configure DVC
         env:
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: make configuracion_DVC_remoto
-
       - name: Traer datos DVC
         env:
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           dvc remote modify diabetes_storage password $DAGSHUB_TOKEN
           dvc pull -r diabetes_storage
-
-      - name: Debug DVC auth
-        run: |
-          cat .dvc/config
-
-      - name: Debug DVC
-        run: |
-          dvc remote list
-          dvc status -c
-
-      - name: Traer datos DVC
-        run: make pull_dvc
-
       - name: Analizar código
         run: make lint
-
       - name: Entrenar modelo
         run: make train
-
       - name: Evaluacion
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
