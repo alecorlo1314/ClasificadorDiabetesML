@@ -5,3 +5,5 @@ matplotlib
 skops
 black
 flake8
+dvc[http]==3.30.3
+pathspec<0.12
