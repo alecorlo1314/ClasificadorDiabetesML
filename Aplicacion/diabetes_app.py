@@ -1,5 +1,4 @@
 import gradio as gr
-import skops.io as sio
 from skops.io import get_untrusted_types, load
 
 unsafe = get_untrusted_types(file="Modelo/pipeline.skops")
