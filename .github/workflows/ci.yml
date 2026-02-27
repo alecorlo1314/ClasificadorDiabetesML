@@ -39,7 +39,7 @@ jobs:
         run: make install
 
       - name: Revisar el formato
-        run: make format-check
+        run: make format
         
       - name: Configure DVC
         run: make configuracion_DVC_remoto
