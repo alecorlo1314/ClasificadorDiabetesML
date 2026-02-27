@@ -37,6 +37,8 @@ jobs:
 
       - name: Configurando dvc
         uses: iterative/setup-dvc@v1
+
+      - run: pip install "dvc[http]==3.30.3"
     
       - name: Install dependencies
         run: make install
