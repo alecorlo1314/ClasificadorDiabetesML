@@ -34,10 +34,6 @@ jobs:
 
       - name: Configurar CML para el Reporte Final
         uses: iterative/setup-cml@v2
-
-      - name: Clean pip environment
-        run: |
-          pip uninstall -y dvc pathspec || true
     
       - name: Install dependencies
         run: make install
@@ -50,11 +46,16 @@ jobs:
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: make configuracion_DVC_remoto
 
+      - name: Debug DVC auth
+        run: |
+          dvc remote list
+          dvc remote modify diabetes_storage --list
+
       - name: Debug DVC
         run: |
           dvc remote list
           dvc status -c
-          
+
       - name: Traer datos DVC
         run: make pull_dvc
 
