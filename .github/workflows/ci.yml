@@ -35,11 +35,14 @@ jobs:
       - name: Configurar CML para el Reporte Final
         uses: iterative/setup-cml@v2
 
+      - name: Configurando dvc
+        uses: iterative/setup-dvc@v1
+    
       - name: Install dependencies
         run: make install
 
       - name: Revisar el formato
-        run: make format-check
+        run: make format
         
       - name: Configure DVC
         run: make configuracion_DVC_remoto
