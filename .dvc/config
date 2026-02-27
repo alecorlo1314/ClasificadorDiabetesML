@@ -1,2 +1,4 @@
+[core]
+    remote = diabetes_storage
 ['remote "diabetes_storage"']
     url = https://dagshub.com/alecorlo1234/ClasificadorDiabetesML.dvc
