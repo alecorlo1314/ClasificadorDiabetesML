@@ -1,6 +1,0 @@
-outs:
-- md5: a3b04b06cdc829535b42b6777d339aca
-  size: 3757550
-  hash: md5
-  path: 
-    clasificador_diabetes_ml_csv_v2.0.0__diabetes_clasificacion_prediction_dataset.csv
