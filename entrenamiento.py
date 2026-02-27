@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 def main():
     print("Cargando datos...")
     diabetes_df = cargar_datos(
-        "Datos/clasificador_diabetes_ml_csv_v2.0.0__diabetes_clasificacion_prediction_dataset.csv"
+        "Datos/clasificador_diabetes_ml_csv_v2.0.0__diabetes_clasificacion_prediction_dataset_actualmente.csv"
     )
 
     print("Dividiendo datos...")
