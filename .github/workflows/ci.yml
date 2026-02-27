@@ -44,8 +44,10 @@ jobs:
 
       - name: Revisar el formato
         run: make format
-        
+
       - name: Configure DVC
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: make configuracion_DVC_remoto
 
       - name: Debug DVC
