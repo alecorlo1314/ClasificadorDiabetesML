@@ -41,12 +41,11 @@ hf-login:
 	git fetch origin
 	git switch -c update --track origin/update || git switch update
 	pip install -U "huggingface_hub[cli]"
-	git config --global credential.helper store
 	hf auth login --token $(HF) --add-to-git-credential
-	hf auth whoami
 
 push-hub:
-	hf upload alecorlo1234/ClasificadorDiabetesML ./Aplicacion/diabetes_prediction_dataset.py /diabetes_prediction_dataset.py --repo-type space --commit-message="Sincronizando diabetes_prediction_dataset.py"
-	hf upload alecorlo1234/ClasificadorDiabetesML ./Modelo /Modelo --repo-type space --commit-message="Sincronizando Modelo"
+	hf upload alecorlo1234/ClasificadorDiabetesML ./Aplicacion --repo-type=space --commit-message="Sincronizar archivos de Aplicacion"
+	hf upload alecorlo1234/ClasificadorDiabetesML ./Modelo /Modelo --repo-type=space --commit-message="Sincronizar archivos del modelo"
+	hf upload alecorlo1234/ClasificadorDiabetesML ./Resultados /Resultados --repo-type=space --commit-message="Sincronizar resultados de las metricas"
 
 deploy: hf-login push-hub

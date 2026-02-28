@@ -73,7 +73,9 @@ ejemplos = [
 
 # Título y descripción
 titulo = "Clasificador de Diabetes con ML"
-descripcion = "Recibe parámetros clínicos y predice si un paciente es diabético (1) o no (0)."
+descripcion = (
+    "Recibe parámetros clínicos y predice si un paciente es diabético (1) o no (0)."
+)
 articulo = "Proyecto de Machine Learning con DVC, GitHub y DagsHub."
 
 # Interfaz
