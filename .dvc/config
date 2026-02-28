@@ -2,3 +2,6 @@
     remote = diabetes_storage
 ['remote "diabetes_storage"']
     url = https://dagshub.com/alecorlo1234/ClasificadorDiabetesML.dvc
+    auth = basic
+    user = alecorlo1234
+    password = 3039dd656bf3d2623cc96a0270a4699d744b976c
