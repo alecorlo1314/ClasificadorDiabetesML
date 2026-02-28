@@ -1,0 +1,33 @@
+```
+└── 📁ClasificadorDiabetesML
+    └── 📁.github
+        └── 📁workflows
+            ├── cd.yml
+            ├── ci.yml
+    └── 📁.vscode
+        ├── settings.json
+    └── 📁Aplicacion
+        ├── __init__.py
+        ├── diabetes_app.py
+        ├── README.md
+        ├── requirements.txt
+    └── 📁Datos
+        ├── .gitignore
+        ├── clasificador_diabetes_ml_csv_v2.0.0__diabetes_clasificacion_prediction_dataset_actualmente.csv.dvc
+    └── 📁Modelo
+        ├── pipeline.skops
+    └── 📁src
+        ├── __init__.py
+        ├── datos.py
+        ├── entrenar.py
+        ├── evaluar.py
+        ├── guardar.py
+        ├── predecir.py
+    ├── .dvcignore
+    ├── .gitignore
+    ├── entrenamiento.py
+    ├── Makefile
+    ├── notebook.ipynb
+    ├── README.md
+    └── requirements.txt
+```
