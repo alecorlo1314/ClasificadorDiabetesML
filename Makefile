@@ -46,6 +46,5 @@ hf-login:
 push-hub:
 	hf upload alecorlo1234/ClasificadorDiabetesML ./Aplicacion --repo-type=space --commit-message="Sincronizar archivos de Aplicacion"
 	hf upload alecorlo1234/ClasificadorDiabetesML ./Modelo /Modelo --repo-type=space --commit-message="Sincronizar archivos del modelo"
-	hf upload alecorlo1234/ClasificadorDiabetesML ./Resultados /Resultados --repo-type=space --commit-message="Sincronizar resultados de las metricas"
-
+	
 deploy: hf-login push-hub
